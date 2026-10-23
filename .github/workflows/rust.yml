@@ -1,0 +1,18 @@
+name: Rust CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Test all targets
+        run: cargo test --all-targets
+      - name: Run executable smoke test
+        run: cargo run --quiet -- 2 3 4 5 9 11
