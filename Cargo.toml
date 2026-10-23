@@ -1,0 +1,8 @@
+[package]
+name = "lambdagen"
+version = "0.1.0"
+edition = "2021"
+description = "LambdaGen: Rust lambda runtime and Lua-inspired logic language"
+license = "MIT"
+
+[dependencies]
