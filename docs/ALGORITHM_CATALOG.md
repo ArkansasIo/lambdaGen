@@ -1,23 +1,31 @@
-# Algorithm Catalog
+# LambdaGen Algorithm Catalog
 
-This catalog is the planned standard library surface for LambdaGen.
+This catalog is the target standard-library map, not a claim that every function is implemented today.
 
-| Family | Core algorithms |
-|---|---|
-| Sort | bubble, insertion, selection, shell, merge, quick, heap, counting, radix, stable, unstable |
-| Search | linear, binary, interpolation, lower/upper bound, selection/kth |
-| Graph | BFS, DFS, Dijkstra, A*, Bellman-Ford, Floyd-Warshall, topological sort, SCC, MST, max-flow |
-| Dynamic programming | knapsack, LCS, edit distance, LIS, matrix-chain, coin change |
-| Number theory | gcd, lcm, sieve, primality, factorization, modular arithmetic, CRT, discrete-log research hooks |
-| Combinatorics | factorial, binomial, permutations, combinations, partitions, generating functions |
-| Strings | substring search, KMP, Z, Rabin-Karp, trie, edit distance, tokenization |
-| Data structures | vectors, deques, heaps, hash maps, ordered maps, union-find, trees, graphs |
-| Geometry | distance, orientation, intersections, convex hull, nearest pair |
-| Numerical | root finding, interpolation, integration, ODE, matrix/vector operations, FFT |
-| Statistics | mean, variance, quantiles, covariance, correlation, distributions, Monte Carlo |
-| Optimization | argmin/max, hill climbing, simulated annealing, gradient methods, linear programming hooks |
-| AI | tensors, autodiff, activations, losses, optimizers, attention, inference utilities |
-| Systems | serialization, hashing, compression, scheduling, caching, profiling |
-| Research | conjecture experiments, benchmark runner, property tests, reproducibility records |
+| Domain | Initial algorithms | Later expansion |
+|---|---|---|
+| Arithmetic | gcd, lcm, factorial, powers, modular arithmetic | arbitrary precision, residue systems |
+| Number theory | primality, sieve, factorization, Euler phi, divisors | CRT, discrete logarithms, number fields |
+| Conjectures | Goldbach, twin primes, Collatz, Legendre, Polignac, Bertrand | configurable bounded-search framework |
+| Linear algebra | matrix multiply, Gaussian elimination | LU/QR/SVD, eigenvalues, sparse matrices |
+| Calculus | finite differences, Newton, integration | symbolic differentiation, ODE/PDE solvers |
+| Optimization | argmin, argmax, gradient descent | simplex, quasi-Newton, constrained optimization |
+| Graphs | BFS, DFS, Dijkstra, components | A*, max-flow, matching, centrality |
+| Combinatorics | permutations, combinations | partitions, generating functions, enumeration |
+| Geometry | distance, area, centroid, convex hull | triangulation, intersections, spatial indexes |
+| Statistics | mean, variance, covariance | regression, distributions, hypothesis tests |
+| Probability | sampling, expectation | Markov chains, Bayesian inference, Monte Carlo |
+| Signal | convolution, FFT | filters, wavelets, spectral estimation |
+| Information | entropy | mutual information, coding theory |
+| Cryptography | hashes and primitives via vetted libraries | signatures, key exchange, finite-field arithmetic |
+| Symbolic | expression trees and simplification | CAS, polynomial algebra, solvers |
+| Machine learning | k-means, distance metrics | linear/logistic models, trees, neural-network kernels |
+| Strings | reverse, search, edit distance | regex engine, tokenization, parsing |
+| Sorting/search | quicksort, mergesort, binary search | heaps, radix sort, selection algorithms |
+| Dynamic programming | Fibonacci, LCS, knapsack | sequence alignment, shortest-path DP, memoization |
 
-The catalog is intentionally broader than the currently implemented set. New algorithms should be added with tests and complexity documentation rather than as unverified stubs.
+## Design rule
+
+Each algorithm should have a stable name, domain, complexity notes, accepted input types, deterministic/reproducible behavior, parallelization capability, test vectors, and research provenance.
+
+The registry is metadata-first so the language can discover capabilities before a concrete implementation is loaded. This also gives the eventual compiler and IDE enough information to provide completion, documentation and static diagnostics.
