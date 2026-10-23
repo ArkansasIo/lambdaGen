@@ -1,0 +1,4 @@
+pub fn fibonacci_dp(n:usize)->u128{let(mut a,mut b)=(0u128,1u128);for _ in 0..n{(a,b)=(b,a.saturating_add(b))}a}
+pub fn knapsack_01(weights:&[usize],values:&[u64],capacity:usize)->u64{assert_eq!(weights.len(),values.len());let mut dp=vec![0u64;capacity+1];for(&w,&v)in weights.iter().zip(values){if w>capacity{continue}for c in (w..=capacity).rev(){dp[c]=dp[c].max(dp[c-w].saturating_add(v))}}dp[capacity]}
+pub fn lcs_length(a:&str,b:&str)->usize{let b=b.chars().collect::<Vec<_>>();let mut prev=vec![0;b.len()+1];for ca in a.chars(){let mut cur=vec![0;b.len()+1];for j in 0..b.len(){cur[j+1]=if ca==b[j]{prev[j]+1}else{cur[j].max(prev[j+1])}}prev=cur}prev[b.len()]}
+pub fn edit_distance(a:&str,b:&str)->usize{let b=b.chars().collect::<Vec<_>>();let mut prev=(0..=b.len()).collect::<Vec<_>>();for(i,ca)in a.chars().enumerate(){let mut cur=vec![i+1;b.len()+1];for j in 0..b.len(){cur[j+1]=(prev[j+1]+1).min(cur[j]+1).min(prev[j]+usize::from(ca!=b[j]))}prev=cur}prev[b.len()]}

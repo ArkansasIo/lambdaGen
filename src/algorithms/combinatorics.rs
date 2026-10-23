@@ -1,0 +1,4 @@
+pub fn factorial(n:u64)->u128{(1..=n).fold(1u128,|a,b|a.saturating_mul(b as u128))}
+pub fn permutations<T:Clone>(items:&[T])->Vec<Vec<T>>{fn rec<T:Clone>(a:&mut Vec<T>,k:usize,o:&mut Vec<Vec<T>>){if k==a.len(){o.push(a.clone());return}for i in k..a.len(){a.swap(k,i);rec(a,k+1,o);a.swap(k,i)}}let mut a=items.to_vec();let mut o=Vec::new();rec(&mut a,0,&mut o);o}
+pub fn combinations<T:Clone>(items:&[T],k:usize)->Vec<Vec<T>>{fn rec<T:Clone>(a:&[T],k:usize,s:usize,c:&mut Vec<T>,o:&mut Vec<Vec<T>>){if c.len()==k{o.push(c.clone());return}if a.len()-s<k-c.len(){return}for i in s..a.len(){c.push(a[i].clone());rec(a,k,i+1,c,o);c.pop()}}let mut o=Vec::new();if k<=items.len(){rec(items,k,0,&mut Vec::new(),&mut o)}o}
+pub fn binomial(n:usize,k:usize)->u128{if k>n{return 0}let k=k.min(n-k);let mut r=1u128;for i in 1..=k{r=r.saturating_mul((n-k+i)as u128)/(i as u128)}r}
