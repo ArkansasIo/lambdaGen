@@ -45,10 +45,12 @@ pub fn classify(value: i64) -> NumberKind {
         NumberKind::Zero
     } else if value == 1 {
         NumberKind::One
-    } else if is_prime(value) {
+    } else if is_prime(value) && is_even(value) {
         NumberKind::EvenPrime
     } else if is_even(value) {
         NumberKind::EvenComposite
+    } else if is_prime(value) {
+        NumberKind::OddPrime
     } else {
         NumberKind::OddComposite
     }
