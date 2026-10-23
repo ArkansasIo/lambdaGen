@@ -41,9 +41,7 @@ impl ExperimentRunner {
         Self { config: ExecutionConfig { workers: config.workers.max(1) } }
     }
 
-    pub fn config(&self) -> ExecutionConfig {
-        self.config
-    }
+    pub fn config(&self) -> ExecutionConfig { self.config }
 
     pub fn record<F>(&self, spec: &ExperimentSpec, operation: F) -> ExperimentRun
     where
@@ -64,10 +62,11 @@ impl ExperimentRunner {
     }
 
     pub fn result_table(run: &ExperimentRun) -> DataTable {
-        let mut table = DataTable::new(
-            "experiment_results",
-            vec!["experiment_id", "algorithm", "input_range", "tested", "passed", "counterexample", "proof_status", "duration_ms"],
-        );
+        let columns = [
+            "experiment_id", "algorithm", "input_range", "tested", "passed",
+            "counterexample", "proof_status", "duration_ms",
+        ].into_iter().map(String::from).collect();
+        let mut table = DataTable::new("experiment_results", columns);
         let counterexample = run.result.counterexample.clone().unwrap_or_default();
         let status = format!("{:?}", run.result.proof_status);
         table.add_row(vec![
@@ -82,6 +81,10 @@ impl ExperimentRunner {
         ]).expect("runner generated a valid row");
         table
     }
+}
+
+impl Default for ExperimentRunner {
+    fn default() -> Self { Self::new(ExecutionConfig::default()) }
 }
 
 #[cfg(test)]
@@ -106,8 +109,4 @@ mod tests {
         let run = runner.record(&spec, |_| (10, 9, Some("10".into())));
         assert_eq!(run.result.proof_status, ProofStatus::Disproved);
     }
-}
-
-impl Default for ExperimentRunner {
-    fn default() -> Self { Self::new(ExecutionConfig::default()) }
 }
