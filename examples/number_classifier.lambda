@@ -1,0 +1,44 @@
+-- Lua-inspired lambdaGen syntax
+
+object Number
+    property value : integer
+
+    function new(value)
+        self.value = value
+        return self
+    end
+
+    function is_even()
+        return self.value % 2 == 0
+    end
+
+    function is_odd()
+        return self.value % 2 ~= 0
+    end
+
+    function is_prime()
+        if self.value < 2 then
+            return false
+        end
+
+        return prime(self.value)
+    end
+end
+
+lambda Even(number) => number % 2 == 0
+lambda Odd(number)  => number % 2 ~= 0
+lambda Prime(number) => prime(number)
+
+paragraph Explain(number)
+    when Even(number) then
+        say "The number is even."
+    otherwise
+        say "The number is odd."
+    end
+
+    when Prime(number) then
+        say "The number is prime."
+    otherwise
+        say "The number is not prime."
+    end
+end
